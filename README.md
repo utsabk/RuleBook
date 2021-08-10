@@ -1,0 +1,2 @@
+# Overview
+RuleBook is an interactive, hyperlinked rulebook application for a card game, of which rules are described in [rules.txt.](https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt) 
