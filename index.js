@@ -3,7 +3,9 @@ import 'dotenv/config.js';
 import express from 'express';
 import cors from 'cors';
 import customFetch from './utils/fetch.js';
-import parseRuleBook from './utils/parser.js'
+import parseRuleBook from './utils/parser.js';
+import groupAllRules from './utils/group.js';
+
 
 
 const app = express();
@@ -20,7 +22,9 @@ app.get('/', async (req, res) => {
   
   const arrayOfRules = parseRuleBook(response);
 
-  res.json(arrayOfRules);
+  const group = groupAllRules(arrayOfRules);
+
+  res.json(group);
 });
 
 app.listen(process.env.PORT, () => {
