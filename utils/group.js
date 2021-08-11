@@ -36,7 +36,7 @@ const groupAllRules = (array) => {
 
     if (!result[ruleNo]) result[ruleNo] = { ...currentObj, child: [] };   // if there is no property in accumulator with this letter create it
 
-    else result[ruleNo].child.push({ number:currentObj.number,subrule:currentObj.rule, ...(currentObj.examples ? {example: currentObj.examples  }:{})}); // if there is, push current element to children array
+    else result[ruleNo].child.push({ number:currentObj.number,subrule:currentObj.rule, ...(currentObj.examples ? {examples: currentObj.examples  }:{})}); // if there is, push current element to children array
 
     return result;
   }, {});

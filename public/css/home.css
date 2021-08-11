@@ -18,40 +18,58 @@ main {
   font-family: 'Open Sans', Arial, sans-serif;
   background-color: #fafafa;
   color: #262626;
-  
-  
 }
 
 #toc_container {
-    background: #f9f9f9 none repeat scroll 0 0;
-    display: table;
-    font-size: 200%;
-    margin-bottom: 1em;
-    padding: 20px;
-    width: auto;  
+  background: #f9f9f9 none repeat scroll 0 0;
+  display: table;
+  font-size: 150%;
+  font-weight: 500;
+  margin-bottom: 1em;
+  padding: 20px;
+  width: auto;
 }
 
 .toc_title {
-    font-weight: 700;
-    text-align: center;
+  font-weight: 700;
+  text-align: center;
 }
 
-#toc_container li, #toc_container ul, #toc_container ul li{
-    list-style: outside none none !important;
+ul {
+  padding-left: 2rem;
+}
+
+ul li {
+  padding: 5px;
+  background-position: 0 0;
+  background-size: 1.6rem 1.6rem;
+  background-repeat: no-repeat;
 }
 
 a:link {
-    text-decoration: none;
-  }
-  
-  a:visited {
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  a:active {
-    text-decoration: underline;
-  }
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+b {
+padding: 5px;
+}
+
+.section{
+  transition: height 0.45s ease-in-out;
+  overflow: hidden;
+}
+.section:not(.active) {
+  display: none;
+}
