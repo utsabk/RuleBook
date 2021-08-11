@@ -1,0 +1,24 @@
+/* Base Styles */
+
+:root {
+  font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+main {
+  font-family: 'Open Sans', Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #fafafa;
+  color: #262626;
+  display: flex;
+  justify-content: center;
+}
