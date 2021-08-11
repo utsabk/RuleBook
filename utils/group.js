@@ -1,44 +1,46 @@
 'use strict';
 
-const group = (condition, result, currentObj) => {
-
-  if (!result[condition]) result[condition] = { ...currentObj, child: [] };   // if there is no property in accumulator with this letter create it
-
-  else result[condition].child.push(currentObj); // if there is, push current element to children array
-
-  return result;
-  // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
-};
-
-const groupBySegment = (array) => {
-  const object = array.reduce((result, currentObj) => {
-    const condition = currentObj.number[0]; // get first letter of number of current element
-
-    return group(condition, result, currentObj);
-  }, {});
-
-  return Object.entries(object).map(([key, value]) => value); // loop through nested objects and return array of values only
-};
-
 const groupByChapter = (array) => {
-  const object = array.reduce((result, currentObj) => {
-    const condition = parseInt(currentObj.number); 
+  const segments = array.reduce((result, currentObj) => {
+    const segmentNo = currentObj.number[0]; // get first letter of number of current element
 
-    return group(condition, result, currentObj);
+    if (!result[segmentNo]) result[segmentNo] = { number: currentObj.number,segment:currentObj.chapter, child: [] };   // if there is no property in accumulator with this letter create it
+
+    else result[segmentNo].child.push(currentObj); // if there is, push current element to children array
+  
+    return result;  }, {});
+
+  return Object.entries(segments).map(([key, value]) => value); // loop through nested objects and return array of values only
+};
+
+const groupByRules = (array) => {
+  const chapters = array.reduce((result, currentObj) => {
+    const chapterNo = parseInt(currentObj.number); 
+
+    if (!result[chapterNo]) result[chapterNo] = { number: currentObj.number,chapter:currentObj.rule, child: [] };   // if there is no property in accumulator with this letter create it
+
+    else result[chapterNo].child.push(currentObj); // if there is, push current element to children array
+
+    return result;
+
   }, {});
 
-  return groupBySegment(
-    Object.entries(object).map(([key, value]) => value)
+  return groupByChapter(
+    Object.entries(chapters).map(([key, value]) => value)
   );
 };
 
 const groupAllRules = (array) => {
-  const object = array.reduce((result, currentObj) => {
-    const [condition, ...rest] = currentObj.number.split(/[a-zA-Z]/);
+  const rules = array.reduce((result, currentObj) => {
+    const ruleNo= currentObj.number.slice(0,-1);
 
-    return group(condition, result, currentObj);
+    if (!result[ruleNo]) result[ruleNo] = { ...currentObj, child: [] };   // if there is no property in accumulator with this letter create it
+
+    else result[ruleNo].child.push({ number:currentObj.number,subrule:currentObj.rule, ...(currentObj.examples ? {example: currentObj.examples  }:{})}); // if there is, push current element to children array
+
+    return result;
   }, {});
-  return groupByChapter(Object.entries(object).map(([key, value]) => value));
+  return groupByRules(Object.entries(rules).map(([key, value]) => value));
 };
 
 export default groupAllRules;
