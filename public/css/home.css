@@ -66,10 +66,10 @@ b {
 padding: 5px;
 }
 
-.section{
+.ruleUL{
   transition: height 0.45s ease-in-out;
   overflow: hidden;
 }
-.section:not(.active) {
+.ruleUL:not(.active) {
   display: none;
 }
