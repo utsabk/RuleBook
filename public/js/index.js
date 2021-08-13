@@ -1,6 +1,6 @@
 'use strict';
 import customFetch from './fetch.js';
-import {slideToggle, htmlToElement } from './util.js'
+import { htmlToElement } from './util.js'
 
 
 
@@ -15,7 +15,7 @@ const listItemWitExample = (example) =>
 
 const createList = (array, parentElement) => {
     return array.map((segment) => {
-        const segmentListItem = listItemWithLink(segment.number, segment.segment);
+        const segmentListItem = listItemWithoutLink(segment.number, segment.segment);
         segmentListItem.className = 'segment';
 
         parentElement.appendChild(segmentListItem);
@@ -29,19 +29,25 @@ const createList = (array, parentElement) => {
                 ul.appendChild(chapterListItem);
                 segmentListItem.appendChild(ul);
 
+                const rightScreen = document.querySelector('.rules');
+
+                //Click event listner 
                 chapterListItem.children[1].addEventListener('click', (event) => {
                 event.preventDefault();
-                slideToggle(chapterListItem.children[2]);
+                const [ul] = document.getElementsByClassName(chapter.number);
+                document.querySelectorAll('.rule').forEach(rule => rule.style.display = 'none')
+                ul.querySelectorAll('.rule').forEach(rule => rule.style.display = 'block')
                 });
 
                 const ruleUL = document.createElement('ul'); // Rule container
-                ruleUL.className = 'ruleUL';
+                ruleUL.className = chapter.number;
+
 
                 chapter.child.map((rule) => {
                 const ruleListItem = listItemWithoutLink(rule.number, rule.rule);
                 ruleListItem.className = 'rule';
                 ruleUL.appendChild(ruleListItem);
-                chapterListItem.appendChild(ruleUL);
+                rightScreen.appendChild(ruleUL);
                 if (rule.examples && rule.examples.length)
                     rule.examples.map((ex) => ruleListItem.appendChild(listItemWitExample(ex)));
 
@@ -67,7 +73,7 @@ const createList = (array, parentElement) => {
 const populateRules = async () => {
     const rules = await customFetch('./rules/');
   
-    const topUL = document.querySelector('.toc'); // Segments container
+    const topUL = document.querySelector('.list-head'); // Segments container
   
     createList(rules, topUL);
 };
