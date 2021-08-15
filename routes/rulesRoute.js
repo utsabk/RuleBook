@@ -1,8 +1,8 @@
 import express from 'express';
-import rulesController from '../controllers/rulesController.js';
+import getRules from '../controllers/rulesController.js';
 
 const router = express.Router();
 
-router.route('/').get(rulesController);
+router.route('/').get(getRules);
 
 export default router;

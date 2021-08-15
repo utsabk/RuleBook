@@ -1,17 +1,7 @@
 'use strict';
 import customFetch from './fetch.js';
-import { htmlToElement } from './util.js'
+import { listItemWithLink, listItemWithoutLink, listItemWitExample } from './util.js'
 
-
-
-const listItemWithLink = (number, title) =>
-  htmlToElement(`<li><b>${number}</b><a href=#${title}>${title}</a></li>`);
-
-const listItemWithoutLink = (number, title) =>
-  htmlToElement(`<li><b>${number}</b>${title}</li>`);
-
-const listItemWitExample = (example) =>
-  htmlToElement(`<p class'example'><i><b>Example:</b>${example}</i></p>`);
 
 const createList = (array, parentElement) => {
     return array.map((segment) => {

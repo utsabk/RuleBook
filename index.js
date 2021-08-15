@@ -9,6 +9,7 @@ const app = express();
 app.use(cors()); // To allow resources from different sources/outside domains
 
 app.use(express.static('public'));
+app.use('/modules', express.static('node_modules'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

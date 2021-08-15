@@ -7,4 +7,14 @@ const htmlToElement = (html) => {
   return template.content.firstChild;
 };
 
-export { htmlToElement };
+const listItemWithLink = (number, title) =>
+  htmlToElement(`<li><b>${number}</b><a href=#${title}>${title}</a></li>`);
+
+const listItemWithoutLink = (number, title) =>
+  htmlToElement(`<li><b>${number}</b>${title}</li>`);
+
+const listItemWitExample = (example) =>
+  htmlToElement(`<p class'example'><i><b>Example:</b>${example}</i></p>`);
+
+
+export { listItemWithLink, listItemWithoutLink, listItemWitExample };

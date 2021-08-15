@@ -1,21 +1,20 @@
 'use strict';
-import customFetch from '../utils/fetch.js';
-import parseRuleBook from '../utils/parser.js';
-import groupAllRules from '../utils/group.js';
-
-const fetchUrl =
-  'https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt';
-
+import * as model from '../models/rules.js';
 
 const getRules = async (req, res) => {
+  const query = req.query.query;
+  try {
+    const rules = await model.getAllRules();
 
-  const response = await customFetch(fetchUrl);
+    if (query) {
+      const search = await model.serachRules(query);
 
-  const arrayOfRules = parseRuleBook(response);
-
-  const group = groupAllRules(arrayOfRules);
-
-  res.json(group);
+      return search ? res.json(search) : res.send('No search found');
+    }
+    res.json(rules);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export default getRules;
