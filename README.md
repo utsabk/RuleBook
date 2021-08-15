@@ -5,7 +5,8 @@ RuleBook is an interactive, hyperlinked rulebook application for a card game. Al
 * Parse a text file (rulebook) into each indivisual rules.
 * Fetch the rules and populate them in a TOC.
 * A Table of Contents with a list of chapters.
-* Hyperlinked chapters display the conataining rules/subrules in the chapter.
+* Hyperlinked chapters conataining rules/subrules.
+* Search for a rule conataining a word/s
 
 
 
@@ -22,9 +23,10 @@ RuleBook is an interactive, hyperlinked rulebook application for a card game. Al
 ```
 backend
     │
-    └─── controllers            #Parse rulebook 
+    └─── controllers            #parse rulebook 
+    └─── models                 #manage data,logic and rules   
     └─── routes                 #define the endpoints
-    └─── index.js               #Express app that listens to server port
+    └─── index.js               #express app that listens to server port
     └─── .env                   #store all environment variables
     └─── package-lock.json      #npm auto-generated document
     └─── package.json           #holds metadata and npm packagage list

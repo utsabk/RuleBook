@@ -5,18 +5,19 @@ const matchedRules = (rules, query) => {
 
   const serachThrough = (rules, query) => {
     return rules.map((rule) => {
-      const [ruleNumber, ruleContent] = Object.keys(rule); // Access first and second property of object
+      const [firstProp, secondProp] = Object.keys(rule); // Access first and second property of object
       const regex = new RegExp(`\\b${query}\\b`, 'g');
-      if (regex.test(rule[ruleContent])) {
+      if (regex.test(rule[secondProp])) {
+          const replceWith = `<strong style="color:#FF0000";>${query}</strong>`//Highlight the searched item
+          const ruleContent = rule[secondProp].replace(regex,replceWith)
         matchedRules.push({
           number: rule.number,
-          [ruleContent]: rule[ruleContent],
+          [secondProp]: ruleContent,
         });
       }
       if (rule.child && rule.child.length)
         return serachThrough(rule.child, query);
     });
-    //  .filter((rule) => (rule ? JSON.stringify(rule) !== '[]' : rule)); // Remove undefined and enplty arrays
   };
 
   serachThrough(rules, query);
